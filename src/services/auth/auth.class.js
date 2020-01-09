@@ -1,37 +1,30 @@
-/* eslint-disable no-unused-vars */
+const { NotAuthenticated } = require('@feathersjs/errors');
+
+const bcrypt = require('bcrypt');
+
 exports.Auth = class Auth {
-  constructor(options) {
+  constructor(options, app) {
+    this.app = app;
     this.options = options || {};
   }
 
-  async find(params) {
-    return [];
+  async find(ctx) {
+    const user = await this.app.service('users').get(ctx.user.id);
+    return user;
   }
 
-  async get(id, params) {
-    return {
-      id,
-      text: `A new message with ID: ${id}!`
-    };
+  async create(data) {
+    // Find user
+    const [user] = await this.app
+      .service('users')
+      .find({ query: { username: data.username } });
+    const validPassword = await bcrypt.compare(data.password, user.password);
+    if (validPassword) return user;
+    throw new NotAuthenticated();
   }
 
-  async create(data, params) {
-    if (Array.isArray(data)) {
-      return Promise.all(data.map(current => this.create(current, params)));
-    }
-
-    return data;
-  }
-
-  async update(id, data, params) {
-    return data;
-  }
-
-  async patch(id, data, params) {
-    return data;
-  }
-
-  async remove(id, params) {
+  async remove(id) {
+    // TODO: remove cookie if issued
     return { id };
   }
 };

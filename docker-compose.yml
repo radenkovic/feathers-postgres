@@ -2,7 +2,7 @@ version: '3'
 
 services:
   feathers:
-    image: node:12
+    image: node:12-slim
     restart: always
     working_dir: /usr/app
     volumes:
@@ -10,13 +10,13 @@ services:
       - node_modules_cache:/usr/app/node_modules/ # exclude node modules
     ports:
       - 3000:3000
-    command: bash -c "yarn && yarn migrate && yarn dev" # && yarn seed for seeding (before yarn dev)
+    command: bash -c "yarn && yarn migrate &&  yarn dev" # && yarn seed for seeding (before yarn dev)
     depends_on:
       - postgres
 
   # Local postgres instance
   postgres:
-    image: postgres
+    image: postgres:12-alpine
     restart: always
     volumes:
       - pgata:/var/lib/postgresql/data

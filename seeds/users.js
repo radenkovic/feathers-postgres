@@ -10,13 +10,7 @@ exports.seed = function(knex) {
           id: 1,
           username: 'dan',
           password: await bcrypt.hash('asdfasdf123', 10),
-          email: 'dan@radenkovic.org'
-        },
-        {
-          id: 2,
-          username: 'john',
-          password: await bcrypt.hash('asdfasdf123', 10),
-          email: 'john@june.ai'
+          email: 'dan@test.com'
         }
       ]);
     });

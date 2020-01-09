@@ -1,8 +1,8 @@
 // Application hooks that run for every service
-
+const bindUser = require('./hooks/bind-user');
 module.exports = {
   before: {
-    all: [],
+    all: [bindUser], // extract user from JWT
     find: [],
     get: [],
     create: [],

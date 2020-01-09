@@ -11,7 +11,7 @@ const middleware = require('./middleware');
 const services = require('./services');
 const appHooks = require('./app.hooks');
 const channels = require('./channels');
-const knex = require('./knex');
+const knex = require('knex');
 const app = express(feathers());
 const knexConfig = require('../knexfile');
 
@@ -28,7 +28,7 @@ app.use(express.urlencoded({ extended: true }));
 // // Host the public folder
 // app.use('/', express.static(app.get('public')));
 
-// Setup knex adapter
+// Setup knex adapter (exposed as app.get('db'))
 app.configure(app => {
   const db = knex(knexConfig);
   app.set('db', db);
@@ -37,9 +37,6 @@ app.configure(app => {
 
 // Set up Plugins and providers
 app.configure(express.rest());
-
-app.configure(knex);
-
 // Configure other middleware (see `middleware/index.js`)
 app.configure(middleware);
 // Set up our services (see `services/index.js`)

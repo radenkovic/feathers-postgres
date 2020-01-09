@@ -1,10 +1,8 @@
+const { discard, iff, isProvider } = require('feathers-hooks-common');
+const authorize = require('../../hooks/authorize');
 module.exports = {
   before: {
-    all: [
-      hook => {
-        hook.params.user = { id: 1, name: 'test' };
-      }
-    ],
+    all: [authorize],
     find: [],
     get: [],
     create: [],
@@ -14,7 +12,7 @@ module.exports = {
   },
 
   after: {
-    all: [],
+    all: [iff(isProvider('external'), discard('password'))],
     find: [],
     get: [],
     create: [],

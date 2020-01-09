@@ -5,17 +5,16 @@ exports.Users = class Users {
     this.model = options.model;
   }
 
-  async find(params) {
-    console.log('PARAMS', params);
-    const res = await this.model.select('*');
+  async find(ctx) {
+    const res = await this.model.select('*').where(ctx.query);
     return res;
   }
 
-  async get(id, params) {
-    return {
-      id,
-      text: `A new message with ID: ${id}!`
-    };
+  async get(id) {
+    return this.model
+      .select('*')
+      .where({ id })
+      .first();
   }
 
   async create(data, params) {
