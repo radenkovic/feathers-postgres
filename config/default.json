@@ -1,0 +1,8 @@
+{
+  "host": "localhost",
+  "port": "PORT",
+  "paginate": {
+    "default": 10,
+    "max": 50
+  }
+}

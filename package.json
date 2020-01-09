@@ -1,0 +1,59 @@
+{
+  "name": "referral-app-api",
+  "description": "Referral app feathersJS",
+  "version": "0.0.0",
+  "homepage": "",
+  "main": "src",
+  "keywords": [
+    "feathers"
+  ],
+  "author": {
+    "name": "Dan Radenkovic",
+    "email": "bogdan.radenkovic@gmail.com"
+  },
+  "contributors": [],
+  "bugs": {},
+  "directories": {
+    "lib": "src",
+    "test": "test/",
+    "config": "config/"
+  },
+  "engines": {
+    "node": "^12.0.0",
+    "yarn": ">= 0.18.0"
+  },
+  "scripts": {
+    "test": "yarn run eslint && yarn run jest",
+    "lint": "eslint src/. test/. --config .eslintrc.js --fix",
+    "dev": "nodemon src/ -L",
+    "start": "node src/",
+    "jest": "jest  --forceExit",
+    "migrate": "knex migrate:latest",
+    "seed": "knex seed:run",
+    "rollback": "knex migrate:rollback"
+  },
+  "dependencies": {
+    "@feathersjs/configuration": "^4.4.1",
+    "@feathersjs/errors": "^4.4.1",
+    "@feathersjs/express": "^4.4.1",
+    "@feathersjs/feathers": "^4.4.1",
+    "@feathersjs/transport-commons": "^4.4.3",
+    "bcrypt": "^3.0.7",
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "helmet": "^3.21.2",
+    "knex": "^0.20.7",
+    "pg": "^7.17.0",
+    "winston": "^3.0.0"
+  },
+  "devDependencies": {
+    "axios": "^0.19.1",
+    "eslint": "^6.7.2",
+    "eslint-config-prettier": "^6.9.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "jest": "^24.9.0",
+    "nodemon": "^2.0.1",
+    "prettier": "^1.19.1"
+  }
+}
